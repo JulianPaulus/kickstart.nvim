@@ -171,8 +171,6 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>2', function()
         harpoon:list():select(2)
       end)
-      -- vim.keymap.set('n', '<leader>a', mark.add_file)
-      -- vim.keymap.set('n', '<C-e>', ui.toggle_quick_menu)
     end,
   },
 
