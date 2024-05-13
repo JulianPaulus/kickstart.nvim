@@ -191,6 +191,17 @@ require('lazy').setup({
 
   { 'mbbill/undotree' },
 
+  {
+    'nvim-telescope/telescope-file-browser.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
+    config = function()
+      vim.keymap.set('n', '<space>fb', ':Telescope file_browser<CR>')
+      vim.keymap.set('n', '<space>fc', ':Telescope file_browser path=%:p:h select_buffer=true<CR>')
+
+      require('telescope').load_extension 'file_browser'
+    end,
+  },
+
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
