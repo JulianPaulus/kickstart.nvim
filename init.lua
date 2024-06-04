@@ -66,8 +66,9 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 15
 
+vim.opt.tabstop = 4
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -76,6 +77,7 @@ vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 vim.keymap.set('n', '<C-y>', vim.lsp.buf.signature_help)
+vim.keymap.set('n', '<A-CR>', vim.lsp.buf.code_action)
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -166,13 +168,11 @@ require('lazy').setup({
         harpoon.ui:toggle_quick_menu(harpoon:list())
       end)
 
-      vim.keymap.set('n', '<leader>1', function()
-        harpoon:list():select(1)
-      end)
-
-      vim.keymap.set('n', '<leader>2', function()
-        harpoon:list():select(2)
-      end)
+      for i = 1, 9 do
+        vim.keymap.set('n', '<leader>' .. i, function()
+          harpoon:list():select(i)
+        end)
+      end
     end,
   },
 
@@ -835,7 +835,24 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'rust', 'javascript', 'typescript', 'java', 'kotlin', 'go' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'vim',
+        'vimdoc',
+        'rust',
+        'javascript',
+        'typescript',
+        'java',
+        'kotlin',
+        'go',
+        'yaml',
+        'json',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -861,6 +878,15 @@ require('lazy').setup({
       --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
       --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
       --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+      local parser_config = require('nvim-treesitter.parsers').get_parser_configs()
+      parser_config.ejs = {
+        install_info = {
+          url = 'https://github.com/tree-sitter/tree-sitter-embedded-template',
+          files = { 'src/parser.c' },
+          requires_generate_from_grammar = true,
+        },
+        filetype = 'ejs',
+      }
     end,
   },
 
