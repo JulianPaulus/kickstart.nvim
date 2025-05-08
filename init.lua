@@ -149,6 +149,18 @@ require('lazy').setup({
   -- NOTE: Custom Plugins
 
   {
+    'nvim-treesitter/nvim-treesitter-context',
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+    config = function()
+      require('treesitter-context').setup {
+        enabled = true,
+        line_numbers = true,
+        mode = 'topline',
+      }
+    end,
+  },
+
+  {
     'akinsho/bufferline.nvim',
     version = '*',
     dependencies = 'nvim-tree/nvim-web-devicons',
