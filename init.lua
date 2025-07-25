@@ -475,17 +475,24 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {
-        --   find_files = {
-        --     hidden = true,
-        --   },
-        -- },
+        pickers = {
+          find_files = {
+            hidden = false,
+          },
+          git_files = {
+            hidden = true,
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
-          ['file-browser'] = {
+          ['file_browser'] = {
             hijack_netrw = true,
+            hidden = {
+              file_browser = true,
+              folder_browser = true,
+            },
             mappings = {
               ['i'] = {
                 -- your custom insert mode mappings
