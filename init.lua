@@ -499,7 +499,7 @@ require('lazy').setup({
               },
               ['n'] = {
                 -- your custom normal mode mappings
-                ['c'] = fb_actions.create_from_prompt,
+                -- ['c'] = fb_actions.create_from_prompt,
               },
             },
           },
