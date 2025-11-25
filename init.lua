@@ -275,7 +275,7 @@ require('lazy').setup({
             cond = require('lazy.status').has_updates,
             color = { fg = '#ff9e64' },
           },
-        },
+  },
       },
     },
   },
@@ -309,7 +309,12 @@ require('lazy').setup({
   },
 
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  {
+    'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+    config = function()
+      require('guess-indent').setup {}
+    end
+  },
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
