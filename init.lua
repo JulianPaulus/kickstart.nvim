@@ -188,6 +188,26 @@ require('lazy').setup({
   -- NOTE: Custom Plugins
 
   {
+    'kdheepak/lazygit.nvim',
+    lazy = true,
+    cmd = {
+      'LazyGit',
+      'LazyGitConfig',
+      'LazyGitCurrentFile',
+      'LazyGitFilter',
+      'LazyGitFilterCurrentFile',
+    },
+    -- optional for floating window border decoration
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    -- setting the keybinding for LazyGit with 'keys' is recommended in
+    -- order to load the plugin when the command is run for the first time
+    keys = {
+      { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+    },
+  },
+  {
     'almo7aya/openingh.nvim',
     config = function()
       vim.api.nvim_set_keymap('n', '<Leader>gf', ':OpenInGHFile <CR>', { silent = true, noremap = true })
@@ -275,7 +295,7 @@ require('lazy').setup({
             cond = require('lazy.status').has_updates,
             color = { fg = '#ff9e64' },
           },
-  },
+        },
       },
     },
   },
@@ -313,7 +333,7 @@ require('lazy').setup({
     'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
     config = function()
       require('guess-indent').setup {}
-    end
+    end,
   },
 
   -- NOTE: Plugins can also be added by using a table,
