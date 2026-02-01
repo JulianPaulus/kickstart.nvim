@@ -30,7 +30,7 @@ return {
       },
 
       completion = {
-        -- source = 'cmp',
+        source = 'cmp',
       },
 
       md_files = {
