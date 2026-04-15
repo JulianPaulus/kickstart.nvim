@@ -1,6 +1,5 @@
 return {
-  'dancorreia-swe/99',
-  branch = 'fix/silent-handle-completion-source',
+  'ThePrimeagen/99',
   config = function()
     local _99 = require '99'
 
