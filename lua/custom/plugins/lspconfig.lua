@@ -91,34 +91,29 @@ return {
 
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-    local servers = {
-      lua_ls = {
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = 'Replace',
-            },
+    vim.lsp.config('*', { capabilities = capabilities })
+
+    vim.lsp.config('lua_ls', {
+      settings = {
+        Lua = {
+          completion = {
+            callSnippet = 'Replace',
           },
         },
       },
-    }
-
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      'stylua',
     })
-    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
-    require('mason-lspconfig').setup {
-      ensure_installed = {},
-      automatic_installation = false,
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          require('lspconfig')[server_name].setup(server)
-        end,
+    vim.lsp.config('cucumber_language_server', {
+      settings = {
+        cucumber = {
+          features = { 'src/**/*.feature' },
+          glue = { 'src/**/*.ts' },
+        },
       },
-    }
+    })
+
+    require('mason-tool-installer').setup { ensure_installed = { 'stylua' } }
+
+    require('mason-lspconfig').setup {}
   end,
 }
