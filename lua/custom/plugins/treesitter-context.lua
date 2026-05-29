@@ -7,5 +7,11 @@ return {
       line_numbers = true,
       mode = 'topline',
     }
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'markdown',
+      callback = function()
+        require('treesitter-context').disable()
+      end,
+    })
   end,
 }
